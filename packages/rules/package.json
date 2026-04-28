@@ -3,13 +3,13 @@
   "version": "2026.04.0",
   "description": "Language configs and query assets for @obfuscan/core.",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/bytebardorg/obfuscan",
+  "homepage": "https://github.com/ByteBardOrg/obfuscan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bytebardorg/obfuscan",
+    "url": "git+https://github.com/ByteBardOrg/obfuscan.git",
     "directory": "packages/rules"
   },
-  "bugs": "https://github.com/bytebardorg/obfuscan/issues",
+  "bugs": "https://github.com/ByteBardOrg/obfuscan/issues",
   "keywords": [
     "security",
     "obfuscation",

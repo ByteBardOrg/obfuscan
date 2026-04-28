@@ -34,7 +34,7 @@ If you're unsure whether something is a vulnerability or a bypass, **report it p
 
 ## Reporting a vulnerability
 
-**Use GitHub Security Advisories** (preferred): <https://github.com/bytebardorg/obfuscan/security/advisories/new>
+**Use GitHub Security Advisories** (preferred): <https://github.com/ByteBardOrg/obfuscan/security/advisories/new>
 
 This creates a private channel between you and the maintainers and gives us a clean path to issue a CVE if warranted.
 

@@ -16,7 +16,7 @@ The fastest paths to merged PRs, in order:
 You spotted a sink we don't catch in language X. Open `packages/rules/languages/X.json`, add the fully-qualified name to the relevant array, run the tests, open a PR.
 
 ```bash
-git clone https://github.com/bytebardorg/obfuscan
+git clone https://github.com/ByteBardOrg/obfuscan
 cd obfuscan
 cd packages/core
 npm ci --legacy-peer-deps

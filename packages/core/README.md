@@ -4,7 +4,7 @@ Detect obfuscated code and likely backdoors in pull-request diffs. Multi-languag
 
 [![npm](https://img.shields.io/npm/v/@obfuscan/core)](https://www.npmjs.com/package/@obfuscan/core)
 [![license](https://img.shields.io/npm/l/@obfuscan/core)](./LICENSE)
-[![ci](https://github.com/bytebardorg/obfuscan/actions/workflows/ci.yml/badge.svg)](https://github.com/bytebardorg/obfuscan/actions)
+[![ci](https://github.com/ByteBardOrg/obfuscan/actions/workflows/ci.yml/badge.svg)](https://github.com/ByteBardOrg/obfuscan/actions)
 
 ## What it does
 
@@ -51,7 +51,7 @@ npm install @obfuscan/core @obfuscan/rules
 pnpm add @obfuscan/core @obfuscan/rules
 ```
 
-The `core` package ships the engine; `rules` ships the language configs and tree-sitter queries and is updated independently as new attack patterns surface. We use SemVer for the engine and CalVer (`2026.04.0`) for the rules.
+The `core` package ships the engine; `rules` ships language configs and tree-sitter query assets, not parser grammars. Hosts that want parser-backed custom detectors provide their own grammars via `RuleSet.loadGrammar()` / `GrammarHandle.parse()`. We use SemVer for the engine and CalVer (`2026.04.0`) for the rules.
 
 ## Using `@obfuscan/rules`
 

@@ -4,7 +4,7 @@ Detect obfuscated code and likely backdoors in pull-request diffs. Multi-languag
 
 [![npm](https://img.shields.io/npm/v/@obfuscan/core)](https://www.npmjs.com/package/@obfuscan/core)
 [![license](https://img.shields.io/npm/l/@obfuscan/core)](./LICENSE)
-[![ci](https://github.com/bytebardorg/obfuscan/actions/workflows/ci.yml/badge.svg)](https://github.com/bytebardorg/obfuscan/actions)
+[![ci](https://github.com/ByteBardOrg/obfuscan/actions/workflows/ci.yml/badge.svg)](https://github.com/ByteBardOrg/obfuscan/actions)
 
 ## What it does
 

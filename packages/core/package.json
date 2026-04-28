@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "description": "Detect obfuscated code and likely backdoors in pull-request diffs. Multi-language. Diff-aware. Pure TypeScript.",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/bytebardorg/obfuscan",
+  "homepage": "https://github.com/ByteBardOrg/obfuscan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bytebardorg/obfuscan",
+    "url": "git+https://github.com/ByteBardOrg/obfuscan.git",
     "directory": "packages/core"
   },
-  "bugs": "https://github.com/bytebardorg/obfuscan/issues",
+  "bugs": "https://github.com/ByteBardOrg/obfuscan/issues",
   "keywords": [
     "security",
     "obfuscation",
