@@ -1,0 +1,5 @@
+{
+  "description": "setup.py with network + shell side effects executed at install time",
+  "mustFlag": ["obf.python-setup-side-effect", "obf.suspicious-io-cluster"],
+  "as": "malicious/python/setup-py-side-effect/setup.py"
+}

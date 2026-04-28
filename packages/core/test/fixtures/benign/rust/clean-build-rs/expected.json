@@ -1,0 +1,6 @@
+{
+  "description": "build.rs that only emits cargo directives — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.cargo-build-rs-network"],
+  "as": "benign/rust/clean-build-rs/build.rs"
+}

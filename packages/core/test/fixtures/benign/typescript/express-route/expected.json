@@ -1,0 +1,5 @@
+{
+  "description": "ordinary Express route handler — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.dynamic-exec-with-non-literal", "obf.shell-with-untrusted-input"]
+}

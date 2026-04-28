@@ -1,0 +1,4 @@
+{
+  "description": "string.char decoder feeds loadstring — decode-then-exec in Lua",
+  "mustFlag": ["obf.decode-then-exec"]
+}

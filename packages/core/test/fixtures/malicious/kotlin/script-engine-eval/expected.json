@@ -1,0 +1,4 @@
+{
+  "description": "ScriptEngine.eval with a non-literal String argument — dynamic-exec in Kotlin",
+  "mustFlag": ["obf.dynamic-exec-with-non-literal"]
+}

@@ -1,0 +1,4 @@
+{
+  "description": "base64.StdEncoding.DecodeString feeds text/template.Parse — decode-then-exec in Go",
+  "mustFlag": ["obf.decode-then-exec"]
+}

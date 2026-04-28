@@ -1,0 +1,5 @@
+{
+  "description": "ordinary Go HTTP handler — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.decode-then-exec", "obf.network-then-exec", "obf.deserializer-untrusted"]
+}

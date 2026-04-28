@@ -1,0 +1,5 @@
+{
+  "description": "net/http.Get response feeds text/template.Parse — network-then-exec in Go",
+  "mustFlag": ["obf.network-then-exec"],
+  "mustBlock": ["obf.network-then-exec"]
+}

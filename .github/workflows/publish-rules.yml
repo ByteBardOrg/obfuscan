@@ -1,0 +1,80 @@
+name: Publish Rules
+
+on:
+  push:
+    tags:
+      - "rules-*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "CalVer version to publish (must match packages/rules/package.json)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish-rules:
+    name: Publish @obfuscan/rules
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/rules
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure rules package exists
+        run: |
+          if [[ ! -f "package.json" ]]; then
+            echo "packages/rules/package.json is missing. Add the rules package manifest before publishing."
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Resolve and validate version
+        id: version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            EXPECTED_VERSION="${GITHUB_REF_NAME#rules-}"
+          else
+            EXPECTED_VERSION="${INPUT_VERSION}"
+          fi
+
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+
+          node -e "
+            const calver = /^\\d{4}\\.(0[1-9]|1[0-2])\\.\\d+$/;
+            const [expected, pkg] = process.argv.slice(1);
+            if (!calver.test(expected)) {
+              console.error('Expected version is not valid CalVer (YYYY.MM.PATCH):', expected);
+              process.exit(1);
+            }
+            if (!calver.test(pkg)) {
+              console.error('package.json version is not valid CalVer (YYYY.MM.PATCH):', pkg);
+              process.exit(1);
+            }
+            if (expected !== pkg) {
+              console.error('Version mismatch: expected ' + expected + ', package.json has ' + pkg);
+              process.exit(1);
+            }
+          " "${EXPECTED_VERSION}" "${PKG_VERSION}"
+
+          echo "version=${PKG_VERSION}" >> "${GITHUB_OUTPUT}"
+
+      - name: Pack check
+        run: npm pack --dry-run
+
+      - name: Publish
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,5 @@
+{
+  "description": "ordinary Spring REST controller — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.deserializer-untrusted", "obf.shell-with-untrusted-input"]
+}

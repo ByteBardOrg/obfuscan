@@ -1,0 +1,4 @@
+{
+  "description": "BinaryFormatter.Deserialize on a Stream argument — untrusted deserialization in C#",
+  "mustFlag": ["obf.deserializer-untrusted"]
+}

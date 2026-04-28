@@ -1,0 +1,8 @@
+{
+  "name": "innocent-utils",
+  "version": "9.9.9",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node ./scripts/setup.js"
+  }
+}

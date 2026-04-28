@@ -1,0 +1,4 @@
+{
+  "description": "ordinary Kotlin data class — no findings",
+  "expectClean": true
+}

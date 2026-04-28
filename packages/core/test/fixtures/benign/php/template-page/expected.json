@@ -1,0 +1,5 @@
+{
+  "description": "ordinary PHP template — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.decode-then-exec", "obf.dynamic-exec-with-non-literal"]
+}

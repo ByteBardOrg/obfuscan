@@ -1,0 +1,5 @@
+{
+  "description": "ordinary admin script — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.network-then-exec", "obf.decode-then-exec"]
+}

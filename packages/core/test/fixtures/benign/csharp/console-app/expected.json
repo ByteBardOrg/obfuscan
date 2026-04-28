@@ -1,0 +1,5 @@
+{
+  "description": "ordinary console app — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.decode-then-exec", "obf.deserializer-untrusted"]
+}

@@ -1,0 +1,4 @@
+{
+  "description": "eval(base64_decode(literal)) — classic PHP webshell",
+  "mustFlag": ["obf.decode-then-exec"]
+}

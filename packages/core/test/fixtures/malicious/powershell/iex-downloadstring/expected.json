@@ -1,0 +1,5 @@
+{
+  "description": "IEX (New-Object Net.WebClient).DownloadString — network-then-exec",
+  "mustFlag": ["obf.network-then-exec"],
+  "mustBlock": ["obf.network-then-exec"]
+}

@@ -1,0 +1,6 @@
+{
+  "description": "setup.py with no side effects — must NOT flag setup-side-effect",
+  "expectClean": true,
+  "mustNotFlag": ["obf.python-setup-side-effect"],
+  "as": "benign/python/clean-setup/setup.py"
+}

@@ -1,0 +1,4 @@
+{
+  "description": "exec(base64.b64decode(literal)) — classic decode-then-exec",
+  "mustFlag": ["obf.decode-then-exec"]
+}

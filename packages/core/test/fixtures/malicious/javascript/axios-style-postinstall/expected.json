@@ -1,0 +1,5 @@
+{
+  "description": "package.json with postinstall hook (axios-2026 / chalk-debug-2025 shape)",
+  "mustFlag": ["obf.manifest-install-script"],
+  "as": "malicious/javascript/axios-style-postinstall/package.json"
+}

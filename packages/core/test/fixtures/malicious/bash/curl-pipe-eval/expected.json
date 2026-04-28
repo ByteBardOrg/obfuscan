@@ -1,0 +1,5 @@
+{
+  "description": "eval $(curl <url>) — network-then-exec in shell",
+  "mustFlag": ["obf.network-then-exec"],
+  "mustBlock": ["obf.network-then-exec"]
+}

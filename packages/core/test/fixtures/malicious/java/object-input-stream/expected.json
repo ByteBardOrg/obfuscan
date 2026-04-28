@@ -1,0 +1,4 @@
+{
+  "description": "ObjectInputStream.readObject on a Socket stream — Java deserialization RCE shape",
+  "mustFlag": ["obf.deserializer-untrusted"]
+}

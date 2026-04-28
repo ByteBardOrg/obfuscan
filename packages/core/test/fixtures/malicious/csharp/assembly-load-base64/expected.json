@@ -1,0 +1,4 @@
+{
+  "description": "Convert.FromBase64String feeds Assembly.Load — decode-then-exec in C#",
+  "mustFlag": ["obf.decode-then-exec"]
+}

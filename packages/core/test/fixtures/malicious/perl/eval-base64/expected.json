@@ -1,0 +1,4 @@
+{
+  "description": "MIME::Base64::decode_base64 feeds eval — Perl webshell shape",
+  "mustFlag": ["obf.decode-then-exec"]
+}

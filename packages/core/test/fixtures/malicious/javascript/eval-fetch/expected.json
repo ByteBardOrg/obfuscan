@@ -1,0 +1,5 @@
+{
+  "description": "fetch() result fed directly into eval() — network-then-exec",
+  "mustFlag": ["obf.network-then-exec"],
+  "mustBlock": ["obf.network-then-exec"]
+}

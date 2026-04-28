@@ -1,0 +1,4 @@
+{
+  "description": "string-array decoder (obfuscator.io shape) feeding eval",
+  "mustFlag": ["obf.string-array-decoder", "obf.encoded-array-fingerprint", "obf.decode-then-exec"]
+}

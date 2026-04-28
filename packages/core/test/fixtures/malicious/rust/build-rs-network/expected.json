@@ -1,0 +1,5 @@
+{
+  "description": "build.rs performs network IO at compile time",
+  "mustFlag": ["obf.cargo-build-rs-network"],
+  "as": "malicious/rust/build-rs-network/build.rs"
+}

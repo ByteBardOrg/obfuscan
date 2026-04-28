@@ -1,0 +1,4 @@
+{
+  "description": "Runtime.exec with concatenated argument — command injection in Java",
+  "mustFlag": ["obf.shell-with-untrusted-input"]
+}

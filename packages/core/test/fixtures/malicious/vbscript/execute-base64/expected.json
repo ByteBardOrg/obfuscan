@@ -1,0 +1,4 @@
+{
+  "description": "Chr() decoder chain feeds Execute — decode-then-exec in VBScript",
+  "mustFlag": ["obf.decode-then-exec"]
+}

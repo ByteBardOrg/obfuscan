@@ -1,0 +1,4 @@
+{
+  "description": "base64 decode feeds libloading::Library::new — decode-then-exec / library-load-non-literal in Rust",
+  "mustFlag": ["obf.decode-then-exec", "obf.library-load-non-literal"]
+}

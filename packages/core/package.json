@@ -1,0 +1,74 @@
+{
+  "name": "@obfuscan/core",
+  "version": "0.1.0",
+  "description": "Detect obfuscated code and likely backdoors in pull-request diffs. Multi-language. Diff-aware. Pure TypeScript.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bytebardorg/obfuscan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bytebardorg/obfuscan",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/bytebardorg/obfuscan/issues",
+  "keywords": [
+    "security",
+    "obfuscation",
+    "malware",
+    "supply-chain",
+    "code-review",
+    "diff",
+    "tree-sitter",
+    "static-analysis"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "@obfuscan/rules": "*"
+  },
+  "peerDependenciesMeta": {
+    "@obfuscan/rules": { "optional": false }
+  },
+  "dependencies": {
+    "parse-diff": "^0.11.0",
+    "minimatch": "^9.0.0",
+    "fast-levenshtein": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.5.0",
+    "@types/node": "^20.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build && node ./scripts/sync-root-meta.mjs",
+    "test":         "vitest run --config test/vitest.config.ts test/contract test/unit test/fixtures-runner",
+    "test:contract":"vitest run --config test/vitest.config.ts test/contract",
+    "test:unit":    "vitest run --config test/vitest.config.ts test/unit",
+    "test:fixtures":"vitest run --config test/vitest.config.ts test/fixtures-runner",
+    "test:perf":    "vitest run --config test/vitest.config.ts test/perf",
+    "test:perf:full":"OBFUSCAN_PERF_FULL=1 vitest run --config test/vitest.config.ts test/perf",
+    "test:all":     "vitest run --config test/vitest.config.ts",
+    "lint": "eslint src",
+    "format": "prettier -w src"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

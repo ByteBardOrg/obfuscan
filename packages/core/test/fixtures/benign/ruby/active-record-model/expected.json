@@ -1,0 +1,5 @@
+{
+  "description": "ordinary Rails model — no findings",
+  "expectClean": true,
+  "mustNotFlag": ["obf.deserializer-untrusted", "obf.dynamic-exec-with-non-literal"]
+}

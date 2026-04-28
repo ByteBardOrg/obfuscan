@@ -1,0 +1,4 @@
+{
+  "description": "Marshal.load on a value sourced from URI.open — untrusted deserialization",
+  "mustFlag": ["obf.deserializer-untrusted"]
+}

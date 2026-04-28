@@ -1,0 +1,44 @@
+{
+  "name": "@obfuscan/rules",
+  "version": "2026.04.0",
+  "description": "Language configs and query assets for @obfuscan/core.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bytebardorg/obfuscan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bytebardorg/obfuscan",
+    "directory": "packages/rules"
+  },
+  "bugs": "https://github.com/bytebardorg/obfuscan/issues",
+  "keywords": [
+    "security",
+    "obfuscation",
+    "malware",
+    "supply-chain",
+    "rules",
+    "tree-sitter"
+  ],
+  "files": [
+    "languages",
+    "queries/shared",
+    "queries/per-grammar",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./languages/*": "./languages/*",
+    "./queries/shared/*": "./queries/shared/*",
+    "./queries/per-grammar/*": "./queries/per-grammar/*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "prepack": "node ./scripts/sync-root-meta.mjs"
+  }
+}
