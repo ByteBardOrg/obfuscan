@@ -1,6 +1,6 @@
 # obfuscan
 
-Detect obfuscated code and likely backdoors in pull-request diffs. Multi-language. Embeddable. Diff-aware. Pure TypeScript.
+Detect obfuscated code and likely backdoors in files or text. Multi-language. Embeddable. Diff-aware. Pure TypeScript.
 
 [![npm](https://img.shields.io/npm/v/@obfuscan/core)](https://www.npmjs.com/package/@obfuscan/core)
 [![license](https://img.shields.io/npm/l/@obfuscan/core)](./LICENSE)
