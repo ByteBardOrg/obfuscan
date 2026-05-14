@@ -64,6 +64,23 @@ describe("Layer A: high-entropy-literal", () => {
     expect(result).toNotFlag("obf.high-entropy-literal");
   });
 
+  it("does not flag ordinary C# SQL, exception, or log message strings", async () => {
+    const src = `
+command.CommandText = "SELECT * FROM pgmq.send(@queue_name, @message::jsonb)";
+throw new JsonException($"PGMQ message {reader.GetInt64(0)} from queue '{queueName}' deserialized to null.");
+logger.LogWarning(
+    "Failed to publish queued package event batch of {Count} events. First event: {EventType} for {Package}@{Version} (CorrelationId: {CorrelationId}); dropping batch",
+    count,
+    eventType,
+    packageId,
+    version,
+    correlationId);
+`;
+    const { input, fileResolver } = virtualFiles({ "src/PgmqWorker.cs": src });
+    const result = await scan(input, { fileResolver, ...silentOptions() });
+    expect(result).toNotFlag("obf.high-entropy-literal");
+  });
+
   it("does not flag short strings even if entropy is high", async () => {
     const { input, fileResolver } = virtualFiles({
       "src/short.js": `const k = "Zm9v";\n`, // 4 chars, well below the 64-char floor
