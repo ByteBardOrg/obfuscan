@@ -26,6 +26,10 @@ const ENTROPY_THRESHOLD = 4.5; // bits/char
 const MAX_SOURCE_BYTES = 2_000_000; // skip files larger than 2 MB
 const MAX_FINDINGS_PER_FILE = 50; // protect the report from minified bundles
 
+const BASE64ISH_RE = /^[A-Za-z0-9+/=_-]+$/;
+const DATA_URI_BASE64_RE = /^data:[^,]{1,120};base64,[A-Za-z0-9+/=]+$/i;
+const ESCAPED_BYTES_RE = /^(?:\\x[0-9A-Fa-f]{2}|\\u[0-9A-Fa-f]{4}|\\[0-7]{3})+$/;
+
 /** Shannon entropy in bits/char. */
 function shannon(s: string): number {
   if (s.length === 0) return 0;
@@ -37,6 +41,17 @@ function shannon(s: string): number {
     h -= p * Math.log2(p);
   }
   return h;
+}
+
+function looksEncodedOrPacked(s: string): boolean {
+  if (DATA_URI_BASE64_RE.test(s)) return true;
+  if (ESCAPED_BYTES_RE.test(s)) return true;
+
+  // Ordinary prose, SQL, and structured log messages often cross the entropy
+  // threshold. Packed payloads are typically dense and whitespace-free.
+  if (/\s/.test(s)) return false;
+
+  return BASE64ISH_RE.test(s);
 }
 
 /** Convert a 0-based character offset to a 1-based line number. */
@@ -70,6 +85,7 @@ export const highEntropyLiteral: Detector = {
 
       const body = match[2];
       if (!body || body.length < MIN_LEN) continue;
+      if (!looksEncodedOrPacked(body)) continue;
 
       const entropy = shannon(body);
       if (entropy < ENTROPY_THRESHOLD) continue;
