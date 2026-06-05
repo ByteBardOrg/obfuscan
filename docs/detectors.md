@@ -58,6 +58,11 @@ These use `ctx.config` values from `packages/rules/languages/*.json`.
 - Flags file-level cluster: secrets-path + network, or shell + network.
 - Severity: `warn`.
 
+### `obf.npm-c2-dropper`
+- Flags JavaScript/TypeScript package code with C2 polling, decrypt-stage,
+  write/chmod, and child-process launch signals.
+- Severity: `block`.
+
 ### `obf.string-array-decoder.<lang>`
 - Flags obfuscator-style string-array + decoder + sink pattern.
 - Severity: `block`.

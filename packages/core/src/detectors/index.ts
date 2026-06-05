@@ -25,6 +25,7 @@ import { suspiciousIoCluster } from "./suspicious-io-cluster.js";
 import { stringArrayDecoder } from "./string-array-decoder.js";
 import { shellUntrustedInput } from "./shell-untrusted-input.js";
 import { libraryLoadNonLiteral } from "./library-load-non-literal.js";
+import { npmC2Dropper } from "./npm-c2-dropper.js";
 
 // Manifest — ecosystem-specific detectors
 import { manifestInstallScript } from "./manifest-install-script.js";
@@ -52,6 +53,7 @@ const DEFAULTS: readonly Detector[] = Object.freeze([
   dynamicExecNonLiteral,
   deserializerUntrusted,
   suspiciousIoCluster,
+  npmC2Dropper,
   stringArrayDecoder,
   shellUntrustedInput,
   libraryLoadNonLiteral,
@@ -77,6 +79,7 @@ export {
   networkThenExec,
   deserializerUntrusted,
   suspiciousIoCluster,
+  npmC2Dropper,
   stringArrayDecoder,
   shellUntrustedInput,
   libraryLoadNonLiteral,
