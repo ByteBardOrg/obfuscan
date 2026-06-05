@@ -34,7 +34,7 @@ function compile(config: LanguageConfig): RegExp | null {
     cache.set(config, null);
     return null;
   }
-  const alt = namedCallAlternation(list);
+  const alt = namedCallAlternation(list, { allowUnsafeBareTails: true });
   // Capture sink + the first 80 chars of arguments
   const re = new RegExp(`(?:^|[^A-Za-z0-9_$])((?:${alt}))\\s*\\(([^)\\n]{0,200})`, "g");
   cache.set(config, re);

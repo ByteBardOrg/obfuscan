@@ -129,6 +129,21 @@ describe("Layer B: dynamic-exec-with-non-literal", () => {
     const result = await scan(input, { fileResolver, ...silentOptions() });
     expect(result).toNotFlag("obf.dynamic-exec-with-non-literal");
   });
+
+  it("does NOT flag a TypeScript class constructor", async () => {
+    const src = `
+class Scanner {
+  private onStatus: (update: ScannerStatusUpdate) => void;
+
+  constructor(onStatus: (update: ScannerStatusUpdate) => void) {
+    this.onStatus = onStatus;
+  }
+}
+`;
+    const { input, fileResolver } = virtualFiles({ "src/scanner.ts": src });
+    const result = await scan(input, { fileResolver, ...silentOptions() });
+    expect(result).toNotFlag("obf.dynamic-exec-with-non-literal");
+  });
 });
 
 // ─── network-then-exec ─────────────────────────────────────────────────────
@@ -167,6 +182,23 @@ describe("Layer B: network-then-exec", () => {
     const { input, fileResolver } = virtualFiles({ "src/p.js": src });
     const result = await scan(input, { fileResolver, ...silentOptions() });
     expect(result).toBlock("obf.network-then-exec");
+  });
+
+  it("does NOT flag a plain TypeScript fetch call", async () => {
+    const src = `
+class ManifestLoader {
+  constructor(private manifestUrl: string) {}
+
+  async load() {
+    const response = await fetch(this.manifestUrl, { cache: 'no-store' });
+    return response.json();
+  }
+}
+`;
+    const { input, fileResolver } = virtualFiles({ "src/loader.ts": src });
+    const result = await scan(input, { fileResolver, ...silentOptions() });
+    expect(result).toNotFlag("obf.network-then-exec");
+    expect(result).toNotFlag("obf.dynamic-exec-with-non-literal");
   });
 });
 
@@ -277,6 +309,15 @@ function go(name) { exec(\`ls \${name}\`); }
     const { input, fileResolver } = virtualFiles({ "src/p.py": src });
     const result = await scan(input, { fileResolver, ...silentOptions() });
     expect(result).toFlag("obf.shell-with-untrusted-input");
+  });
+
+  it("does NOT flag a TypeScript string that builds but does not run a command", async () => {
+    const src = `
+const command = \`Expand-Archive -Path '\${escapedArchive}' -DestinationPath '\${escapedOutput}' -Force\`;
+`;
+    const { input, fileResolver } = virtualFiles({ "src/archive.ts": src });
+    const result = await scan(input, { fileResolver, ...silentOptions() });
+    expect(result).toNotFlag("obf.shell-with-untrusted-input");
   });
 });
 
