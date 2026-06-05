@@ -25,6 +25,50 @@ export function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+const UNSAFE_BARE_TAILS = new Set([
+  "call",
+  "compile",
+  "constructor",
+  "decode",
+  "do",
+  "exec",
+  "execute",
+  "from",
+  "get",
+  "import",
+  "invoke",
+  "load",
+  "new",
+  "open",
+  "parse",
+  "post",
+  "request",
+  "require",
+  "run",
+  "send",
+  "source",
+  "spawn",
+  "start",
+  "system",
+  "use",
+]);
+
+function isUnsafeBareTail(tail: string): boolean {
+  return UNSAFE_BARE_TAILS.has(tail.toLowerCase());
+}
+
+function qualifiedSuffix(raw: string): string | null {
+  const parts = raw.split(/(\.|::)/);
+  const segments = parts.filter((_, i) => i % 2 === 0 && parts[i] !== "");
+  const separators = parts.filter((_, i) => i % 2 === 1);
+  if (segments.length < 2 || separators.length < 1) return null;
+  const a = segments[segments.length - 2];
+  const b = segments[segments.length - 1];
+  const sep = separators[separators.length - 1];
+  if (!a || !b || !sep) return null;
+  return `${a}${sep}${b}`;
+}
+
 /**
  * Build a regex source matching any of the configured names as a function
  * call. Accepts qualified names — for `base64.b64decode` the regex matches
@@ -35,7 +79,10 @@ export function escapeRegex(s: string): string {
  *
  * Returns an inner alternation suitable for inclusion in a larger pattern.
  */
-export function namedCallAlternation(names: readonly string[]): string {
+export function namedCallAlternation(
+  names: readonly string[],
+  options: { allowUnsafeBareTails?: boolean } = {},
+): string {
   const alts: string[] = [];
   for (const raw of names) {
     if (!raw) continue;
@@ -56,7 +103,13 @@ export function namedCallAlternation(names: readonly string[]): string {
     const tail = parts[parts.length - 1] ?? raw;
     alts.push(escapeRegex(raw));
     if (parts.length > 1 && tail !== raw && tail.length > 0) {
-      alts.push(escapeRegex(tail));
+      if (isUnsafeBareTail(tail) && !options.allowUnsafeBareTails) {
+        const suffix = qualifiedSuffix(raw);
+        if (suffix && suffix !== raw) alts.push(escapeRegex(suffix));
+        alts.push(`(?:\\.|::)${escapeRegex(tail)}`);
+      } else {
+        alts.push(escapeRegex(tail));
+      }
     }
   }
   // Deduplicate while preserving order
