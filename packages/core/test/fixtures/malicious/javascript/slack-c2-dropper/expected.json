@@ -1,0 +1,5 @@
+{
+  "description": "defanged structural Slack C2 dropper fixture is blocked by the npm C2 dropper detector",
+  "mustFlag": ["obf.npm-c2-dropper"],
+  "mustBlock": ["obf.npm-c2-dropper"]
+}
