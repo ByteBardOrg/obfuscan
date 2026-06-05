@@ -1,0 +1,5 @@
+{
+  "description": "defanged Slack C2 loader sample remains non-blocking after network, decrypt, execution, and self-modifying behavior are removed",
+  "expectClean": true,
+  "mustNotFlag": ["obf.npm-c2-dropper"]
+}
