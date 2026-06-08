@@ -260,8 +260,9 @@ beyond `fileResolver`.
 These belong to separate packages so the core stays small and embeddable:
 
 - **CLI** — `@obfuscan/cli` (separate package, not in this scaffold).
-- **GitHub Action** — `obfuscan/obfuscan-action` (separate repo, not in
-  this scaffold).
+- **GitHub Action** — source lives in `packages/action`; Marketplace distribution
+  is generated into ignored local output `marketplace/obfuscan-action` and released
+  from the dedicated `ByteBardOrg/obfuscan-action` repository as `@v1`.
 - **Default rule pack** — `@obfuscan/rules`. CalVer, releases more often
   than core. Resolved at runtime from a workspace sibling, an installed
   `node_modules/@obfuscan/rules`, or `OBFUSCAN_RULES_DIR`.

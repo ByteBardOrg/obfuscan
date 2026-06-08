@@ -1,0 +1,29 @@
+{
+  "name": "@obfuscan/github-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action for obfuscan pull request scanning.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare-dist": "node ./scripts/prepare-dist.mjs",
+    "build": "npm run prepare-dist && esbuild src/index.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/index.js",
+    "generate:marketplace": "node ./scripts/generate-marketplace.mjs",
+    "marketplace": "npm run build && npm run generate:marketplace",
+    "test": "vitest run --config test/vitest.config.ts"
+  },
+  "dependencies": {
+    "@obfuscan/core": "file:../core",
+    "@obfuscan/rules": "file:../rules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.21.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

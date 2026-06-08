@@ -53,6 +53,45 @@ pnpm add @obfuscan/core @obfuscan/rules
 
 The `core` package ships the engine; `rules` ships language configs and tree-sitter query assets, not parser grammars. Hosts that want parser-backed custom detectors provide their own grammars via `RuleSet.loadGrammar()` / `GrammarHandle.parse()`. We use SemVer for the engine and CalVer (`2026.04.0`) for the rules.
 
+## GitHub Action
+
+Run obfuscan directly in pull request CI and have it annotate findings, write a job summary, and upsert a Markdown PR comment.
+
+```yaml
+name: obfuscan
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: ByteBardOrg/obfuscan-action@v1
+        with:
+          fail-on: block
+```
+
+Useful inputs:
+
+- `fail-on`: `block` (default), `warn`, or `never`.
+- `min-severity`: `info` (default), `warn`, or `block`.
+- `comment`: `true` (default) or `false`.
+- `max-findings`: maximum findings shown in the Markdown report, default `50`.
+- `disabled-detectors`: comma or newline separated detector ids.
+- `allowlist-path`: defaults to `.obfuscan/allowlist.json`.
+
+The Marketplace action is distributed from `ByteBardOrg/obfuscan-action`. Generate that repo's contents locally with `cd packages/action && npm run marketplace`; the generated `marketplace/obfuscan-action` folder is ignored in this repo.
+
 ## Using `@obfuscan/rules`
 
 `@obfuscan/core` loads language configs from `@obfuscan/rules` by default, so normal usage is just installing both packages.
@@ -205,7 +244,7 @@ Pre-1.0. The detector framework, scoring, suppression, and tier-1/tier-2 languag
 - [x] Manifest detectors for npm, PyPI, GitHub Actions, Dockerfile
 - [x] Tier-2 language rules (Go, Rust, C#, Java, Kotlin, Lua, Perl, VBScript)
 - [ ] `@obfuscan/cli` 1.0 with SARIF output
-- [ ] `@obfuscan/github-action`
+- [x] `@obfuscan/github-action` v1
 - [ ] `@obfuscan/llm-verify` optional Layer-D package
 - [ ] Reproducible benchmark suite against [Datadog malicious-software-packages-dataset](https://github.com/DataDog/malicious-software-packages-dataset)
 
