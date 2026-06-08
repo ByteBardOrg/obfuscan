@@ -48,3 +48,19 @@ jobs:
 
       - name: Test
         run: npm run test:all
+
+      - name: Install action dependencies
+        working-directory: packages/action
+        run: npm ci --legacy-peer-deps
+
+      - name: Build action
+        working-directory: packages/action
+        run: npm run build
+
+      - name: Generate marketplace action
+        working-directory: packages/action
+        run: npm run generate:marketplace
+
+      - name: Test action
+        working-directory: packages/action
+        run: npm test

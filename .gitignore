@@ -83,6 +83,9 @@ out
 dist
 .output
 
+# Generated GitHub Marketplace action distribution
+marketplace/obfuscan-action/
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
